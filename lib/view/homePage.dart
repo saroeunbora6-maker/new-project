@@ -12,6 +12,7 @@ class Homepage extends StatefulWidget {
   State<Homepage> createState() => _HomepageState();
 }
   var SelectIndec=0;
+  int SelectedIndex=0;
 
 class _HomepageState extends State<Homepage> {
 
@@ -166,7 +167,7 @@ class _HomepageState extends State<Homepage> {
               padding: const EdgeInsets.only(left: 10,right: 10),
                child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Detailpage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Detailpage(productHome: pro.id,)));
                 },
                  child: Container(
                    decoration: BoxDecoration(
@@ -244,6 +245,33 @@ class _HomepageState extends State<Homepage> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: const Color.fromARGB(255, 215, 92, 133),
+        unselectedItemColor: Colors.grey,
+        currentIndex: SelectedIndex,
+        onTap: (value) {
+          setState(() {
+            SelectedIndex=value;
+          });
+        },
+      items: [
+        BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        label: "Home",
+        ),
+        BottomNavigationBarItem(
+        icon: Icon(Icons.favorite),
+        label: "Favorite",
+        ),
+        BottomNavigationBarItem(
+        icon: Icon(Icons.history),
+        label: "History",
+        ),
+        BottomNavigationBarItem(
+        icon: Icon(Icons.person),
+        label: "Profile",
+        ),
+      ]),
     );
   }
 }
