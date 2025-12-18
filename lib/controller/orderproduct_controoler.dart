@@ -34,7 +34,7 @@ List<OderprodcuModel>order_prodcut=[
      name: "Mocha", 
      image: "asset/pexels-david-bares-42311-189258.jpg", 
      ratting: 1.4, 
-     deliveryFree: 0,
+     deliveryFree: 1.0,
      sixeOption: [
       {
         "S":4.44,
@@ -58,7 +58,7 @@ List<OderprodcuModel>order_prodcut=[
      name: "Mocha", 
      image: "asset/dop_3.jpg.webp", 
      ratting: 1.4, 
-     deliveryFree: 2.3,
+     deliveryFree: 0.0,
      sixeOption: [
       {
         "S":4.44,
@@ -80,7 +80,7 @@ List<OderprodcuModel>order_prodcut=[
      name: "Mocha", 
      image: "asset/composition-cup-caffe-latte-coffee-260nw-1613234329.webp", 
      ratting: 1.4, 
-     deliveryFree: 0,
+     deliveryFree: 0.0,
      sixeOption: [
       {
         "S":4.44,

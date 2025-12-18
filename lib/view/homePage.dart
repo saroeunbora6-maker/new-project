@@ -33,7 +33,7 @@ class _HomepageState extends State<Homepage> {
               Container(
                 height: 300,
                 width: double.infinity,
-                color: Colors.black,
+                color: const Color.fromARGB(255, 33, 31, 31),
                child: Padding(
                  padding: const EdgeInsets.only(top: 50,left: 20,right:20 ),
                  child: Column(

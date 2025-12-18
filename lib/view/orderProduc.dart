@@ -1,7 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_1/controller/orderproduct_controoler.dart';
+import 'package:flutter_1/view/aba_page.dart';
+import 'package:flutter_1/view/acleda_page.dart';
+import 'package:flutter_1/view/check_page.dart';
 import 'package:flutter_1/view/homePage.dart';
+import 'package:flutter_1/view/wing_page.dart';
 
 class Orderproduc extends StatefulWidget {
   int ProductDetail;
@@ -11,6 +15,9 @@ class Orderproduc extends StatefulWidget {
   State<Orderproduc> createState() => _OrderproducState();
 }
 bool delivery=true;
+//bool isSuccess = false;
+
+
 
 class _OrderproducState extends State<Orderproduc> {
   @override
@@ -18,6 +25,9 @@ class _OrderproducState extends State<Orderproduc> {
     final produc_Order=order_prodcut.firstWhere((item)=>item.productID==widget.ProductDetail);
      int currenIndex=order_prodcut.indexWhere((element) => element.productID==widget.ProductDetail,);
      double price = produc_Order.sixeOption[SelectIndec].values.first;
+     double total=price*(produc_Order.qty);
+
+     double payment=(delivery)?(total+1):total;
 
    
     return Scaffold(
@@ -35,6 +45,7 @@ class _OrderproducState extends State<Orderproduc> {
                 Text("Order",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)
               ],
             ),
+            SizedBox(height: 10,),
             Container(
               height: 50,
               width: 350,
@@ -81,7 +92,7 @@ class _OrderproducState extends State<Orderproduc> {
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 15,),
            produc_Order.delivery && delivery? Container(
               height: 150,
               width: 350,
@@ -399,23 +410,168 @@ class _OrderproducState extends State<Orderproduc> {
                     children: [
                       Text("Price",style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
                       Spacer(),
-                      Text("${price}"),
+                      Text("\$ ${total}"),
                     ],
                   ),
                   SizedBox(height: 10,),
                   Row(
                     children: [
-                      Text("Delivery Free",style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),)
+                      Text("Delivery Free",style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
+                      Spacer(),
+                      Text("\$${produc_Order.deliveryFree}")
                     ],
-                  )
+                  ),
 
                 ],
               ),
-            )
+            ),
+            SizedBox(height: 100,),
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                  ),
+                  backgroundColor: Colors.white,
+                  builder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            height: 5,
+                            width: 40,
+                            margin: const EdgeInsets.only(bottom: 16),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+
+                          const Text(
+                            "Choose Payment Method",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          paymentCard(
+                            icon: Icons.account_balance,
+                            title: "ABA Bank",
+                            onTap: () {
+                               Navigator.push(context, MaterialPageRoute(builder: (context)=>AbaPage()));
+                            },
+                          ),
+                          paymentCard(
+                            icon: Icons.account_balance_wallet,
+                            title: "ACLEDA Bank",
+                            onTap: () {
+                               Navigator.push(context, MaterialPageRoute(builder: (context)=>AcledaPage()));
+                            },
+                          ),
+                          paymentCard(
+                            icon: Icons.payments,
+                            title: "WING",
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>WingPage()));
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+
+              child: Container(
+                height: 70,
+                width:350 ,
+                child: Row(
+                  children: [
+                    Icon(Icons.credit_card,size: 30,),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8,left: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Paymen/Wallet",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                          Text("\$${payment.toStringAsFixed(2)}"),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 120,),
+                    Icon(Icons.arrow_forward_ios)
+                  ],
+                )
+              ),
+            ),
+            SizedBox(height: 10,),
+          //  if (!isSuccess)
+            InkWell(
+              onTap: () {
+                // setState(() {
+                //   isSuccess = true;
+                // });
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SuccessPage(),
+                  ),
+                );
+              },
+              child: Container(
+                height: 60,
+                width: 350,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 226, 158, 132),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: const Center(
+                  child: Text(
+                    "Order",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
           ],
         ),
       ),
     );
   }
 }
+      Widget paymentCard({
+        required IconData icon,
+        required String title,
+        required VoidCallback onTap,
+      }) {
+        return InkWell(
+          onTap: onTap,
+          child: Card(
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: ListTile(
+              leading: Icon(icon, size: 30, color: Colors.blue),
+              title: Text(
+                title,
+                style: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+            ),
+          ),
+        );
+      }
+
 
