@@ -5,6 +5,7 @@ List<OderprodcuModel>order_prodcut=[
   OderprodcuModel(
     id: 1, 
     productID: 1,
+    qty: 1,
      name: "Caffee", 
      image: "asset/heart-shaped-macha-latte-served-cafe-japan-352299085.webp", 
      ratting: 1.4, 
@@ -29,6 +30,7 @@ List<OderprodcuModel>order_prodcut=[
        OderprodcuModel(
     id: 2, 
     productID: 2,
+    qty: 1,
      name: "Mocha", 
      image: "asset/pexels-david-bares-42311-189258.jpg", 
      ratting: 1.4, 
@@ -52,6 +54,7 @@ List<OderprodcuModel>order_prodcut=[
       OderprodcuModel(
     id: 3, 
     productID: 3,
+    qty: 1,
      name: "Mocha", 
      image: "asset/dop_3.jpg.webp", 
      ratting: 1.4, 
@@ -73,6 +76,7 @@ List<OderprodcuModel>order_prodcut=[
       OderprodcuModel(
     id: 4, 
     productID: 4,
+    qty: 1,
      name: "Mocha", 
      image: "asset/composition-cup-caffe-latte-coffee-260nw-1613234329.webp", 
      ratting: 1.4, 

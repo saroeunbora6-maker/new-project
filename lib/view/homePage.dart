@@ -3,6 +3,9 @@ import 'package:flutter_1/controller/category_controller.dart';
 import 'package:flutter_1/controller/product_controller.dart';
 import 'package:flutter_1/controller/promot_controller.dart';
 import 'package:flutter_1/view/detailPage.dart';
+import 'package:flutter_1/view/favoritePage.dart';
+import 'package:flutter_1/view/historyPage.dart';
+import 'package:flutter_1/view/profile.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 class Homepage extends StatefulWidget {
@@ -260,15 +263,33 @@ class _HomepageState extends State<Homepage> {
         label: "Home",
         ),
         BottomNavigationBarItem(
-        icon: Icon(Icons.favorite),
+        icon: InkWell(
+          onTap: () {
+            setState(() {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Favoritepage()));
+            });
+          },
+          child: Icon(Icons.favorite)),
         label: "Favorite",
         ),
         BottomNavigationBarItem(
-        icon: Icon(Icons.history),
+        icon: InkWell(
+          onTap: () {
+            setState(() {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Historypage()));
+            });
+          },
+          child: Icon(Icons.history)),
         label: "History",
         ),
         BottomNavigationBarItem(
-        icon: Icon(Icons.person),
+        icon: InkWell(
+          onTap: () {
+            setState(() {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
+            });
+          },
+          child: Icon(Icons.person)),
         label: "Profile",
         ),
       ]),
